@@ -1,0 +1,2 @@
+.hero-actions{display:flex;align-items:center;gap:21px}.secondary-hero-button{font-size:10px;color:#c7c4b8;border-bottom:1px solid #67675b;padding:0 0 5px}.secondary-hero-button:hover{color:var(--accent);border-color:var(--accent)}
+@media(max-width:760px){.hero-actions{align-items:flex-start;flex-direction:column;gap:16px}}

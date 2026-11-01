@@ -1,0 +1,11 @@
+{
+  "name": "@mystery-room/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": { "build": "tsc -p tsconfig.json", "typecheck": "tsc --noEmit -p tsconfig.json" },
+  "dependencies": { "zod": "^4.6.7" },
+  "devDependencies": { "typescript": "^5.7.3" }
+}
