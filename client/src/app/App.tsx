@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { caseGenerationRequestSchema } from "@mystery-room/shared";
 
-const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+const API = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? "/api/v1" : "http://127.0.0.1:5000/api/v1");
 let sessionReady: Promise<void> | undefined;
 
 async function ensureSession(force = false): Promise<void> {

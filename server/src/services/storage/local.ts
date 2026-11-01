@@ -1,9 +1,9 @@
 import { randomUUID } from "node:crypto";
 import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { env } from "../../config/env.js";
 
-const storageRoot = fileURLToPath(new URL("../../../../uploads/", import.meta.url));
+const storageRoot = path.resolve(env.UPLOADS_DIR || path.resolve(process.cwd(), "../uploads"));
 const extensions: Record<string, string> = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp" };
 const maxBytes = 8 * 1024 * 1024;
 

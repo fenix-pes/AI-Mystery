@@ -15,6 +15,7 @@ const envSchema = z.object({
   IMAGE_PROVIDER: z.enum(["none", "gemini"]).default("none"),
   IMAGE_PROVIDER_API_KEY: z.string().optional(),
   IMAGE_MODEL: z.string().default("gemini-3.1-flash-image"),
+  UPLOADS_DIR: z.string().optional(),
   GENERATION_TIMEOUT_MS: z.coerce.number().int().positive().default(60000),
   GENERATION_MAX_ATTEMPTS: z.coerce.number().int().positive().default(3),
   GENERATION_MAX_REPAIRS: z.coerce.number().int().nonnegative().default(2)

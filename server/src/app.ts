@@ -3,6 +3,7 @@ import express from "express";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import { randomUUID } from "node:crypto";
+import path from "node:path";
 import { env } from "./config/env.js";
 import { databaseStatus } from "./config/database.js";
 import { errorHandler } from "./middleware/error-handler.js";
@@ -38,6 +39,20 @@ app.get("/api/v1/health", (_request, response) => {
 
 app.use("/api/v1/session", sessionRouter());
 app.use("/api/v1/cases", casesRouter);
+
+app.use("/api", (_request, response) => {
+  response.status(404).json({ success: false, error: { code: "NOT_FOUND", message: "The requested resource was not found.", correlationId: response.locals.correlationId } });
+});
+
+if (env.NODE_ENV === "production") {
+  const clientDist = path.resolve(process.cwd(), "../client/dist");
+  app.use(express.static(clientDist, { index: false }));
+  app.get("*", (_request, response, next) => {
+    response.sendFile(path.join(clientDist, "index.html"), error => {
+      if (error) next(error);
+    });
+  });
+}
 
 app.use((_request, response) => {
   response.status(404).json({ success: false, error: { code: "NOT_FOUND", message: "The requested resource was not found.", correlationId: response.locals.correlationId } });
